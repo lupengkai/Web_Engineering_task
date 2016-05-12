@@ -9,7 +9,8 @@
 ## The Budget
 ## Organization Information
 本组成员10人
-<br>
+
+
 组长：鲁鹏凯
 <br>
 组员：王世宇，侯鹏辉、孙苗苗、王纪、王磊、王萍、张凯旋、李静珂、杜愉
