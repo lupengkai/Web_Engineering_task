@@ -1,5 +1,5 @@
-##Introduction
-##Gathering Background Information  
+## Introduction
+## Gathering Background Information  
 1. 项目的提出原因  
    由于学校处在郊区，同学们的出行受到了极大的限制。
 2. 环境背景分析   
@@ -15,14 +15,14 @@
  3. 安全保证，只有校内的学生之间可以拼车，不涉及非校内人员。 
 4. 项目的可行性及发展预测  
     目前为止，校内并没有这样的平台供每一个学生方便的拼车，有需要是还需在论坛上发布求拼车信息，而且别人不一定能看见。而有了这个拼车应用之后，有需要的同学可以直接上去查看是否有行程和自己一样的同学，主动联系对方就可达成共识。所以这个项目的可行性是毋庸置疑的，并且会在校内实行，如果反应良好会不断改进，争取推广到其他高校。  
-##Component of a Proposal
-##The Executive Summary
+## Component of a Proposal
+## The Executive Summary
 &emsp;&emsp;现在市场上大多数拼车软件针对上班族，因此我们学生党急需一款属于自己的拼车软件。Carpool作为为一款极具实用性的校园拼车软件，目前主要面向西电师生，解决师生日常出行难，出行安全度低等问题。该项目采用多层次营销模式，在保证学生出行安全方便的前提下，推出会员商家福利。并与出租车公司合作，实现互利共赢，因此是极具市场潜力的。
 
 &emsp;&emsp;我们团队有一群优秀的小伙伴，为了更好地向用户提供服务，还需要进行大量需求采集并优化需求分析，并提供令人舒适的界面，解决用户有效验证等一系列问题。目前该项目正处于筹备阶段，暂未遇到困难。
-##The Statement of Need
-##The Project Description
-##The Budget
+## The Statement of Need
+## The Project Description
+## The Budget
 编号	项目			费用		总计	百分比  
 1.	网站开发			1000		1000	42.46%  
 2.	域名购买			80			80		3.40%  
@@ -31,7 +31,7 @@
 5.	其它				500		500	21.23%  
 费用总计：2355  
 
-##Organization Information
+## Organization Information
 本组成员10人  
 
 
@@ -41,5 +41,5 @@
 
 组长鲁鹏凯负责项目构建监督、维护和总结  
 王世宇、侯鹏辉、王纪、张凯旋、杜愉负责web网站的规划与建设  
-##Letter Proposal
-##Conclusion
+## Letter Proposal
+## Conclusion
