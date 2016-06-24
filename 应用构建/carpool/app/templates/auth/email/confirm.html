@@ -1,0 +1,8 @@
+<p>亲爱的{{ user.username }},</p>
+<p>欢迎使用<b>Carpool</b>!</p>
+<p>验证您的邮箱<a href="{{ url_for('auth.confirm', token=token, _external=True) }}">请点击这里</a>.</p>
+<p>或者您可以将以下链接输入浏览器地址栏中:</p>
+<p>{{ url_for('auth.confirm', token=token, _external=True) }}</p>
+<p>祝好</p>
+<p>Carpool团队</p>
+<p><small>注意：回复此邮件无效 。</small></p>

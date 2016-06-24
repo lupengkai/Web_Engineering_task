@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% import "_macros.html" as macros %}
+{% block title %}Carpool{% endblock %}
+{% block page_content %}
+
+
+    <div class="myTab">
+
+        <ul class="nav nav-tabs">
+
+
+            <li {% if not show_ride %} class="active" {% endif %}><a href="{{ url_for('main.show_carpool') }}"><strong>拼车</strong></a>
+            </li>
+
+            <li {% if show_ride %} class="active" {% endif %}><a href="{{ url_for('main.show_ride') }}"><strong>顺风车</strong></a></li>
+
+
+        </ul>
+
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                <th><span class="label label-primary">起点</span></th>
+                <th><span class="label label-primary">终点</span></th>
+                <th><span class="label label-danger">发车时间</span></th>
+                <th><span class="label label-warning">人数</span></th>
+                <th><span class="label label-info">发起人</span></th>
+                <th><span class="label label-info">发布时间</span></th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {% for group in groups %}
+
+                <tr>
+                    <td>{{ group.start_place }}</td>
+                    <td>{{ group.end_place }}</td>
+                    <td>{{ moment(group.start_time).fromNow(refresh=True)}}</td>
+                    <td>{{ group.users.count() }}/{{ group.people_amount }}</td>
+                    <td class="name"><a
+                            href="{{ url_for('main.user', username=group.build_user.username) }}">{{ group.build_user.username }}</a>
+                    </td>
+                    <td>{{ moment(group.timestamp).fromNow(refresh=True)}}</td>
+                    <td><a class="btn btn-link" href="{{ url_for('main.carpool', id=group.id) }}"
+                           role="button">查看更多>></a></td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+
+
+    </div>
+        <div class="pagination">
+        {{ macros.pagination_widget(pagination, 'main.index') }}
+    </div>
+
+
+
+
+
+
+{% endblock %}

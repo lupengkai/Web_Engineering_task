@@ -1,0 +1,7 @@
+亲爱的{{ user.username }}
+欢迎使用Carpool!
+验证您的邮箱请点击以下链接：
+{{ url_for('auth.confirm', token=token, _external=True)}}
+祝好
+Carpool团队
+注意：回复此邮件无效 。

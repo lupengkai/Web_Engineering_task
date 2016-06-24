@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Carpool - Carpools{% endblock %}
+
+{% block page_content %}
+
+    <div class="page-header">
+        <h1>发起的拼车</h1>
+    </div>
+
+    <div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th><span class="label label-primary">起点</span></th>
+                <th><span class="label label-primary">终点</span></th>
+                <th><span class="label label-danger">发车时间</span></th>
+                <th><span class="label label-warning">人数</span></th>
+                <th><span class="label label-info">发布时间</span></th>
+                <th></th>
+            </tr>
+            </thead>
+
+            <tbody>
+
+            {% for group in groups %}
+
+                <tr>
+                    <td>{{ group.start_place }}</td>
+                    <td>{{ group.end_place }}</td>
+                    <td>{{ moment(group.start_time).format('LLL') }}</td>
+                    <td>{{ group.users.count() }}/{{ group.people_amount }}</td>
+                    <td>{{ moment(group.timestamp).format('LLL')  }}</td>
+                    <td><a class="btn btn-link" href="{{ url_for('main.carpool', id=group.id) }}"
+                           role="button">查看更多>></a></td>
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

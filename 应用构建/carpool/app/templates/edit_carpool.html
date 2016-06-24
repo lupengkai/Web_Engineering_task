@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% import 'bootstrap/wtf.html' as wtf %}
+{% block title %} Carpool - Edit Carpool {% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>修改拼车信息</h1>
+    </div>
+
+    <div class="alert alert-info">请注意日期按照2016-6-22 12:30格式填写。</div>
+
+    <div class="col-md-4">
+        {{ wtf.quick_form(form) }}
+    </div>
+
+
+
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ pagedown.include_pagedown() }}
+{% endblock %}

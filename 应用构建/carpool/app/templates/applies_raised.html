@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block title %} applies-raised {% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>发出的申请</h1>
+    </div>
+    <div>
+
+
+        <table class="table">
+            <thead>
+            <tr>
+                <td><strong>目的地</strong></td>
+                <td><strong>发车时间</strong></td>
+                <td><strong>发起人</strong></td>
+                <td><strong>类型</strong></td>
+                <td></td>
+                <td></td>
+            </tr>
+            </thead>
+
+
+            <tbody>
+
+            {% for application in applications %}
+                <tr>
+
+                    <td>{{ application.group.end_place }}</td>
+                    <td>{{ moment(application.group.start_time ).fromNow(refresh=True) }}</td>
+
+                         <td><img src="{{ application.group.build_user.gravatar(size=40) }}" class="img-thumbnail"><a href="{{ url_for('main.user', username=application.group.build_user.username) }}">{{ application.group.build_user.username }}</a></td>
+
+
+                    <td>
+                        {% if application.group.build_user.is_teacher() %}
+                        <span class="label label-info">顺风车</span>
+                        {% else %}
+                        <span class="label label-primary">拼车</span>
+                        {% endif %}
+                    </td>
+
+
+
+
+
+
+                    <td><a href="{{ url_for('main.carpool', id = application.group.id) }}">
+                        <button type="button" class="btn btn-link">拼车详情>></button>
+                    </a></td>
+
+                    {% if not application.is_passed %}
+                        <td>
+                            <button type="button" class="btn btn-warning btn-sm">待审核</button>
+                        </td>
+                    {% else %}
+                        <td>
+                            <button type="button" class="btn btn-success btn-sm">已通过</button>
+                        </td>
+                    {% endif %}
+                </tr>
+
+            {% endfor %}
+
+            </tbody>
+
+
+        </table>
+
+
+    </div>
+
+
+
+{% endblock %}

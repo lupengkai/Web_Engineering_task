@@ -1,0 +1,144 @@
+{% extends "base.html" %}
+{% import "bootstrap/wtf.html" as wtf %}
+{% import "_macros.html" as macros %}
+
+
+
+
+{% block title %}Carpool - Detail{% endblock %}
+{% block page_content %}
+
+
+
+    <div class="page-header">
+        {% if group.build_user.is_student() %}
+            <h1>拼车详情</h1>
+        {% else %}
+            <h1>顺风车详情</h1>
+
+        {% endif %}
+
+
+    </div>
+
+
+
+
+
+    <div class="myDiv">
+        <div class="detail">
+            <p><strong>起点：</strong>{{ group.start_place }}</p>
+            <p><strong>终点：</strong>{{ group.end_place }}</p>
+            <p><strong>出发时间：</strong>{{ moment(group.start_time).format('LLL') }}</p>
+            <p><strong>当前人数：</strong>{{ group.users.count() }}</p>
+            <p><strong>期望人数：</strong>{{ group.people_amount }}</p>
+            <p><strong>发布时间：</strong>{{ moment(group.timestamp).format('LLL') }}</p>
+
+        </div>
+        <div class="myBtn">
+
+            {% if not current_user in group.users %}
+                {% if group.users.count() < group.people_amount %}
+
+                    <a href="{{ url_for('main.apply', group_id= group.id) }}">
+                        <button type="button" class="btn btn-primary">申请加入</button>
+                    </a>
+                {% endif %}
+
+            {% elif current_user == group.build_user%}
+
+
+                {% else %}
+
+                <a href="{{ url_for('main.quit', group_id = group.id) }}">
+                    <button type="button" class="btn btn-danger">退出</button>
+                </a>
+
+
+
+            {% endif %}
+
+            {% if current_user == group.build_user %}
+
+                <a href="{{ url_for('.edit', id=group.id) }}">
+
+                    <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-cog"></span>编辑</button>
+                </a>
+
+                <a href="{{ url_for('.delete_carpool', id=group.id) }}">
+                    <button type="button" class="btn  btn-danger"><span class="glyphicon glyphicon-remove"></span>删除
+                    </button>
+                </a>
+
+            {% elif current_user.is_administrator() %}
+                <a href="{{ url_for('.edit', id=group.id) }}">
+                    <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-cog"></span>编辑 [ADMIN]
+                    </button>
+
+                </a>
+                <a href="{{ url_for('.delete_carpool', id=group.id) }}">
+                    <button type="button" class="btn  btn-danger" href="{{ url_for('.delete_carpool', id=group.id) }}">
+                        <span class="glyphicon glyphicon-remove"></span>删除[ADMIN]
+
+                    </button>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+
+
+    <p>
+        <h4>备注：</h4>
+        {% if group.description_html %}
+            {{ group.description_html | safe }}
+        {% else %}
+            {{ group.description }}
+        {% endif %}
+    </p>
+    <hr>
+
+
+    <div>
+        <strong>组长：</strong><a href="{{ url_for('.user', username=group.build_user.username) }}">
+        <img class="img-thumbnail" src="{{ group.build_user.gravatar(size=40) }}"> </a>
+
+        &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
+
+         <strong>成员：</strong> {% for user in group.users %}
+        {% if user != group.build_user %}
+            <a href="{{ url_for('.user', username=user.username) }}">
+                <img class="img-thumbnail" src="{{ user.gravatar(size=40) }}">
+            </a>
+        {% endif %}
+    {% endfor %}
+
+    </div>
+
+    <hr>
+
+
+
+    <h4 id="comments">评论</h4>
+
+    {% if current_user.is_authenticated %}
+        <div class="comment-form">
+            {{ wtf.quick_form(form) }}
+        </div>
+    {% endif %}
+
+    {% include '_comments.html' %}
+
+     {% if pagination %}
+        <div class="pagination">
+            {{ macros.pagination_widget(pagination, 'main.carpool', fragment='#comments', id=group.id) }}
+        </div>
+    {% endif %}
+
+
+{% endblock %}
+
+{% block scripts %}
+    {{ super() }}
+    {{ pagedown.include_pagedown() }}
+{% endblock %}

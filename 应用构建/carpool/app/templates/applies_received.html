@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+
+{% block title %} applies-received {% endblock %}
+
+{% block page_content %}
+    <div class="page-header">
+        <h1>收到的申请</h1>
+    </div>
+    <div>
+
+
+
+
+    <table class="table">
+        <thead>
+            <tr>
+                <td><strong>申请人</strong></td>
+                <td><strong>发车时间</strong></td>
+                <td><strong>目的地</strong></td>
+                <td></td>
+                <td></td>
+            </tr>
+        </thead>
+
+
+        <tbody>
+
+ {% for application in applications %}
+        <tr>
+            <td><img src="{{ application.applicant.gravatar(size=40) }}" class="img-thumbnail"><a href="{{ url_for('main.user', username=application.applicant.username) }}">{{ application.applicant.username }}</a></td>
+            <td>{{ moment(application.group.start_time ).fromNow(refresh=True) }}</td>
+            <td>{{ application.group.end_place }}</td>
+            <td><a href="{{ url_for('main.carpool', id = application.group.id) }}"><button type="button" class="btn btn-link">拼车详情>></button></a></td>
+
+            {% if not application.is_passed %}
+            <td><a href="{{ url_for('main.approve', application_id=application.id) }}"> <button type="button" class="btn btn-primary btn-sm">同意</button></a></td>
+                {% else %}
+                <td><button type="button" class="btn btn btn-sm">已同意</button></td>
+        {% endif %}
+        </tr>
+
+   {% endfor %}
+
+        </tbody>
+
+
+
+
+    </table>
+
+
+
+
+
+
+
+
+
+
+    </div>
+
+
+
+{% endblock %}
